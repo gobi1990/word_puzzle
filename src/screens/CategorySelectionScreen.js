@@ -6,13 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-
-const categories = [
-  {id: 1, name: 'Animals'},
-  {id: 2, name: 'Citites'},
-  {id: 3, name: 'Food'},
-  {id: 4, name: 'Colors'},
-];
+import Categories from '../utils/Categories';
 
 const CategorySelectionScreen = ({navigation}) => {
   let [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,7 +24,7 @@ const CategorySelectionScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Select a Category</Text>
-      {categories.map(category => (
+      {Categories.map(category => (
         <TouchableOpacity
           key={category.id}
           style={styles.categoryButton}

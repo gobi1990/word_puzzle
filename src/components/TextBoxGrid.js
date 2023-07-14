@@ -1,11 +1,5 @@
-import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import React from 'react';
+import {View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import TextBox from './TextBox';
 import {
   removeLetter,
@@ -17,8 +11,6 @@ const TextBoxGrid = ({word, selectedLetters}) => {
   const shuffledWord = shuffleWord(word);
 
   const gridSize = Math.ceil(Math.sqrt(word.length));
-
-  const [letterVisible, setLetterVisible] = useState(true);
 
   const handleLetterSelect = (letter, index) => {
     selectLetter(letter);

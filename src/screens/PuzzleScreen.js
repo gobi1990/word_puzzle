@@ -1,44 +1,33 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import getWordsForCategory from '../utils/GetWordsForCategory';
 
 const {default: TextBoxGrid} = require('../components/TextBoxGrid');
 
 const PuzzlePage = ({route}) => {
   const selectedType = route.params;
   const selectedLetters = '';
+  const [wordIndex, setWordIndex] = useState(0);
+  const [puzzleWord, setPuzzleWord] = useState('');
 
-  const getWordsForCategory = category => {
-    if (category != null) {
-      switch (category.id) {
-        case 1:
-          return ['Cat', 'Dog', 'Elephant'];
-        case 2:
-          return ['Singapore', 'New york', 'France'];
-        case 3:
-          return ['Pizza', 'Burger', 'Fries'];
-        case 4:
-          return ['Red', 'Blue', 'Green'];
-        default:
-          return [];
-      }
+  const gameWords = getWordsForCategory(selectedType.category);
+
+  useEffect(() => {
+    setPuzzleWord(gameWords[wordIndex]);
+  }, [gameWords, selectedType.category, wordIndex]);
+
+  const nextWordHandler = () => {
+    if (wordIndex < gameWords.length - 1) {
+      setWordIndex(wordIndex + 1);
     } else {
-      return [];
+      console.log('WordList End');
     }
   };
 
-  const words = getWordsForCategory(selectedType.category);
-
-  const textWord = words[0];
   return (
     <View style={styles.puzzleContainer}>
-      <TextBoxGrid word={textWord} selectedLetters={selectedLetters} />
-      <TouchableOpacity style={styles.nextButton} onPress={() => {}}>
+      <TextBoxGrid word={puzzleWord} selectedLetters={selectedLetters} />
+      <TouchableOpacity style={styles.nextButton} onPress={nextWordHandler}>
         <Text style={styles.nextText}>Next</Text>
       </TouchableOpacity>
     </View>
