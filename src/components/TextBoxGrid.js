@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import TextBox from './TextBox';
 import {
   removeLetter,
@@ -38,22 +38,16 @@ const TextBoxGrid = ({word, selectedLetters}) => {
           </View>
         ))}
       </View>
-      {/* <ScrollView horizontal={true} style={styles.shuffledWordContainer}>
-        {shuffledWord.split('').map((letter, index) => (
-          <TouchableOpacity
-            key={index}
-            onPress={() => handleLetterSelect(letter, index)}>
-            <TextBox key={index} value={letter} />
-          </TouchableOpacity>
-        ))}
-      </ScrollView> */}
+      <View>
+        <Text style={styles.hintText}>Hint: Puzzle word hint</Text>
+      </View>
       <FlatList
         data={remainingLetters}
         keyExtractor={(item, index) => index.toString()}
         horizontal
         renderItem={({item}) => (
           <TouchableOpacity onPress={() => handleLetterSelect(item)}>
-            <TextBox value={item} />
+            <TextBox value={item} isLetterVisible={true} />
           </TouchableOpacity>
         )}
       />
@@ -98,6 +92,12 @@ const styles = StyleSheet.create({
   },
   shuffledWordContainer: {
     flexDirection: 'row',
+  },
+  hintText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'black',
   },
 });
 

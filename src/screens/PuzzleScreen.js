@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Dimensions} from 'react-native';
 import getWordsForCategory from '../utils/GetWordsForCategory';
+import TextButton from '../components/TextButton';
 
 const {default: TextBoxGrid} = require('../components/TextBoxGrid');
 
-const PuzzlePage = ({route}) => {
+const PuzzlePage = ({route, navigation}) => {
   const selectedType = route.params;
   const selectedLetters = '';
   const [wordIndex, setWordIndex] = useState(0);
@@ -20,16 +21,16 @@ const PuzzlePage = ({route}) => {
     if (wordIndex < gameWords.length - 1) {
       setWordIndex(wordIndex + 1);
     } else {
-      console.log('WordList End');
+      navigation.replace('Score');
     }
   };
 
   return (
     <View style={styles.puzzleContainer}>
       <TextBoxGrid word={puzzleWord} selectedLetters={selectedLetters} />
-      <TouchableOpacity style={styles.nextButton} onPress={nextWordHandler}>
-        <Text style={styles.nextText}>Next</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TextButton buttonText="Next" clickHandler={nextWordHandler} />
+      </View>
     </View>
   );
 };
@@ -37,22 +38,11 @@ const PuzzlePage = ({route}) => {
 const styles = StyleSheet.create({
   puzzleContainer: {
     paddingTop: 20,
+    height: Dimensions.get('window').height,
   },
-  nextButton: {
-    marginBottom: 10,
-    marginTop: 30,
-    padding: 10,
-    alignSelf: 'center',
-    backgroundColor: 'white',
-    shadowColor: 'grey',
-    shadowRadius: 0.5,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '40%',
-  },
-  nextText: {
-    fontSize: 18,
-    color: 'black',
+  buttonContainer: {
+    paddingTop: 40,
+    paddingHorizontal: 40,
   },
 });
 

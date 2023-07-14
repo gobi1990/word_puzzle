@@ -1,11 +1,6 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import {View, Text, TextInput, StyleSheet} from 'react-native';
+import TextButton from '../components/TextButton';
 
 const NameInputScreen = ({navigation}) => {
   const [name, setName] = useState('');
@@ -15,7 +10,7 @@ const NameInputScreen = ({navigation}) => {
   };
 
   const handleStartPress = () => {
-    navigation.navigate('CategorySelection');
+    navigation.replace('CategorySelection');
   };
 
   return (
@@ -28,9 +23,7 @@ const NameInputScreen = ({navigation}) => {
         onChangeText={handleNameChange}
         value={name}
       />
-      <TouchableOpacity style={styles.button} onPress={handleStartPress}>
-        <Text style={styles.buttonText}>Start</Text>
-      </TouchableOpacity>
+      <TextButton buttonText="Start" clickHandler={handleStartPress} />
     </View>
   );
 };
@@ -56,21 +49,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     paddingHorizontal: 10,
     color: 'black',
-  },
-  button: {
-    elevation: 8,
-    backgroundColor: '#009688',
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    margin: 12,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: '#fff',
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textTransform: 'uppercase',
   },
 });
 

@@ -4,7 +4,7 @@ import {View, Text, StyleSheet} from 'react-native';
 const TextBox = ({value, isLetterVisible}) => {
   return (
     <View style={styles.box}>
-      <Text style={styles.boxText}>{isLetterVisible ? value : value}</Text>
+      <Text style={styles.boxText}>{isLetterVisible ? value : ''}</Text>
     </View>
   );
 };

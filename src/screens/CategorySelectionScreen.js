@@ -1,12 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, Text, StyleSheet, Dimensions} from 'react-native';
 import Categories from '../utils/Categories';
+import TextButton from '../components/TextButton';
 
 const CategorySelectionScreen = ({navigation}) => {
   let [selectedCategory, setSelectedCategory] = useState(null);
@@ -25,12 +20,11 @@ const CategorySelectionScreen = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.title}>Select a Category</Text>
       {Categories.map(category => (
-        <TouchableOpacity
+        <TextButton
           key={category.id}
-          style={styles.categoryButton}
-          onPress={() => categorySelectHandler(category)}>
-          <Text style={styles.categoryText}>{category.name}</Text>
-        </TouchableOpacity>
+          buttonText={category.name}
+          clickHandler={() => categorySelectHandler(category)}
+        />
       ))}
     </View>
   );
